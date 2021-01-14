@@ -33,7 +33,7 @@ mkdir scripts
 
 
 
-# 2. Preparación Material Criptográfico
+# 2. Preparación material criptográfico
 
 2.1. Crear crypto-config.yaml
 En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
@@ -50,8 +50,8 @@ OrdererOrgs:
             - localhost
 
 PeerOrgs:
-    - Name: Arquidiocesis_Santiago
-      Domain: arquidiocesis.santiago.libroeclesial.info
+    - Name: DIOCESIS01 #Arquidiocesis de Santiago
+      Domain: diocesis01.libroeclesial.info
       EnableNodeOUs: true
       Template:
         Count: 1
@@ -60,8 +60,8 @@ PeerOrgs:
       Users:
         Count: 1
 
-    - Name: Diocesis_Iquique
-      Domain: diocesis.iquique.libroeclesial.info
+    - Name: DIOCESIS02 #Diocesis de Melipilla
+      Domain: diocesis02.libroeclesial.info
       EnableNodeOUs: true
       Template:
         Count: 1
@@ -70,8 +70,8 @@ PeerOrgs:
       Users:
         Count: 1
 
-    - Name: Arquidiocesis_Antofagasta
-      Domain: arquidiocesis.antofagasta.libroeclesial.info
+    - Name: DIOCESIS03 #Diocesis de Chillán
+      Domain: diocesis03.libroeclesial.info
       EnableNodeOUs: true
       Template:
         Count: 1
@@ -80,15 +80,37 @@ PeerOrgs:
       Users:
         Count: 1
 
-    - Name: P003
-      Domain: p003.libroeclesial.info
-      EnableNodeOUs: true    
-      Template:
-        Count: 1
-        SANS:
-          - localhost
-      Users:
-        Count: 1        
+# Definición de las demás diocesis
+- Diocesis_Arica
+- Diocesis_Iquique
+- Arquidiocesis_Antofagasta
+- Diocesis_Calama
+- Diocesis_Copiapo
+- ArquiDiocesis_La Serena
+- Prelatura_Illapel
+- Diocesis_San Felipe
+- Diocesis_Valparaíso
+-
+- Diocesis_Melipilla
+- Arquidiocesis_Santiago
+- Obispado_Castrense
+- Diocesis_SanBernardo
+- Diocesis_Rancagua
+- Diocesis_Talca
+- Diocesis_Linares
+- Diocesis_Chillan
+- ArquiDiocesis_Concepción
+-  
+- Diocesis_SantaMaríadelosAngeles
+- Diocesis_Temuco
+- Diocesis_Villarrica
+- Diocesis_Valdivia
+- Diocesis_Osorno
+- ArquiDiocesis_PuertoMontt
+- Diocesis_Ancud
+- Vicariato_Aysén
+- Diocesis_Punta_Arenas
+- Prelatura_Personal_Opus_Dei
 ```
 
 2.2. Ejecutar Generar el material criptográfico de organizaciones y usuarios
@@ -100,7 +122,7 @@ cryptogen generate --config=./crypto-config.yaml
 
 
 
-# 3. Configuración de Canales de comunicación de la red
+# 3. Configuración de canales de comunicación de la red
 
 3.1. Configurar de variables globales
 *configuramos las variables globales del proyecto que seran utilizandas dentro den entorno bash de la consola*
@@ -127,7 +149,7 @@ configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
              -outputCreateChannelTx ./channel-artifacts/channel.tx
 ```
 
-3.4 Configuración de los AnchosPeer
+3.4 Configuración de los AnchorsPeer
 *La red estará conformada por cada unas de las organizaciones, que en este caso serán organizadas por cada una de las diócesis de Chile. (en este archivo sólo se mostrará la gestión con 3 organizaciones ya que los demás sólo serán repetidos y el podrán ser construidas en la personalización del proyecto)*
 ```console
 configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
@@ -142,7 +164,7 @@ configtxgen -profile ThreeOrgsChannel \
             -asOrg Org2MSP
 ```
 
-```
+```console
 configtxgen -profile ThreeOrgsChannel  \
             -channelID marketplace  \
             -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx \
