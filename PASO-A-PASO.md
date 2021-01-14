@@ -18,6 +18,8 @@ chmod +x install-prereq.sh
 ./install-prereq.sh
 ```
 
+# Preparación Material Criptográfico
+
 3. Crear crypto-config.yaml
 En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
 fuente: http://iglesia.cl/
