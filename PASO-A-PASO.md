@@ -86,6 +86,7 @@ PeerOrgs:
 ```console
 cryptogen generate --config=./crypto-config.yaml
 ```
+*El comando **cryptogen** es parte de los elementos instalados en los prerequisitos, y al ejecutarla utilizará el archivo **crypto-config.yaml** para generar todo el material criptográfico necesario para nuestra red blockchain*
 
 5. mkdir channel-artifacts
 
