@@ -2,25 +2,30 @@
 ## Código parte del proyecto: Red blockchain para libros eclesiales de la iglesia católica en Chile
 ### contacto: dcastros@gmail.com
 ### Equipo de trabajo RealTeam {Carlos Araya; Nicolás Ormeño; David Castro}
-### texto nuevo
-# Instalar pre-requisitos
 
-1. Permitir ejecutar el archivo
+# 1. Instalar pre-requisitos
+
+1.1. Permitir ejecutar el archivo
 
 ```console
 chmod +x install-prereq.sh
 
 ```
 
-2. Ejecutar script, o correr los comandos que existen dentro del script
+1.2. Ejecutar script, o correr los comandos que existen dentro del script
 
 ```console
 ./install-prereq.sh
 ```
 
-# Preparación Material Criptográfico
+1.3. Ingresar a carpeta con el proyecto
+```console
+cd libroEclesial
+```
 
-3. Crear crypto-config.yaml
+# 2. Preparación Material Criptográfico
+
+2.1. Crear crypto-config.yaml
 En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
 fuente: http://iglesia.cl/
 
@@ -76,10 +81,10 @@ PeerOrgs:
         Count: 1        
 ```
 
-4. Ejecutar Generar el material critográfico de organizaciones y usuarios
+2.2. Ejecutar Generar el material critográfico de organizaciones y usuarios
 
-```
-cryptogen generate --config=./blockchain-network/crypto-config.yaml
+```console
+cryptogen generate --config=./crypto-config.yaml
 ```
 
 5. mkdir channel-artifacts
