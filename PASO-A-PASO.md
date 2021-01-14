@@ -131,17 +131,22 @@ configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
 *La red estará conformada por cada unas de las organizaciones, que en este caso serán organizadas por cada una de las diócesis de Chile. (en este archivo sólo se mostrará la gestión con 3 organizaciones ya que los demás sólo serán repetidos y el podrán ser construidas en la personalización del proyecto)*
 ```console
 configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
-            -outputAnchorPeersUpdate \
-            ./channel-artifacts/Org1MSPanchors.tx \
+            -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx \
             -asOrg Org1MSP
 ```
 
-```
-configtxgen -profile ThreeOrgsChannel -channelID marketplace -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -asOrg Org2MSP
+```console
+configtxgen -profile ThreeOrgsChannel \
+            -channelID marketplace 
+            -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx  \
+            -asOrg Org2MSP
 ```
 
 ```
-configtxgen -profile ThreeOrgsChannel -channelID marketplace -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx -asOrg Org3MSP
+configtxgen -profile ThreeOrgsChannel  \
+            -channelID marketplace  \
+            -outputAnchorPeersUpdate ./channel-artifacts/Org3MSPanchors.tx \
+            -asOrg Org3MSP 
 ```
 
 9. Crear blockchain-network/base/peer-base.yaml
