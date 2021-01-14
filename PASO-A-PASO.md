@@ -1,5 +1,6 @@
-#Configuración de una red HyperLedger
-##Código parte del proyecto: Red blockchain para libros eclesiales de la iglesia católica en Chile
+# Configuración de una red HyperLedger
+## Código parte del proyecto: Red blockchain para libros eclesiales de la iglesia católica en Chile
+### contacto: dcastros@gmail.com
 
 # Instalar pre-requisitos
 
