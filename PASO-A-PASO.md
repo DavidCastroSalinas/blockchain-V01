@@ -3,16 +3,16 @@
 ### contacto: dcastros@gmail.com
 ### Equipo de trabajo {Carlos Araya;  [Nicolás Ormeño](https://github.com/normeno/simple-hyperledger)  ; [David Castro](https://github.com/DavidCastroSalinas/blockchain-V01) }
 
-# 1. Instalar pre-requisitos
+# 1. Instalación de pre-requisitos
 
-1.1. Permitir ejecutar el archivo
+1.1. Dar permiso de ejecución al archivo de prerequisitos
 
 ```console
 chmod +x install-prereq.sh
 
 ```
 
-1.2. Ejecutar script, o correr los comandos que existen dentro del script
+1.2. Ejecutación de script con prerequisitos, o correr los comandos que existen dentro del script
 
 ```console
 ./install-prereq.sh
