@@ -174,7 +174,7 @@ configtxgen -profile ThreeOrgsChannel  \
 
 # 4. Configuración de Imagenes en Docker-Compose
 
-4.1. Configurar archivo **peer-base.yaml**  
+4.1. Configurar archivo **./base/peer-base.yaml**  
 *configuramos las variables globales del proyecto que seran utilizandas dentro den entorno bash de la consola*
 
 ```yaml
@@ -631,48 +631,45 @@ services:
       - peer0.p004.libroeclesial.info
     networks:
       # ---CHANGED--- our network is called "basic"
-      - basic
+      - basicñ
 ```
 
 
-
-
-9. Crear blockchain-network/base/peer-base.yaml
-
-10. Crear blockchain-network/docker-compose-base-yaml
-
-11. Crear blockchain-netowrk/docker-compose-cli-couchdb.yaml
-
-12. Exportamos las variables que necesitamos
-
-```
+##4.4. Levantar imagenes docker configuradas: Configuración de variables de entorno
+```console
 export CHANNEL_NAME=marketplace
-export FABRIC_CFG_PATH=$WPD # debemos estar en blockchain-network
+export FABRIC_CFG_PATH=$WPD 
 export VERBOSE=false
 ```
 
-13. Levantamos docker-compose
+##4.5. Levantar imagenes docker configuradas: Iniciar Servicios
 
-```
+```console
 CHANNEL_NAME=$CHANNEL_NAME docker-compose -f docker-compose-cli-couchdb.yaml up -d
 ```
 
-14. Probamos que esté ok el contenedor
 
-```
+#5. Entorno de Administración de Peers
+#5.1. Ingresamos al bash del entorno *CLI* 
+
+```console
 docker exec -it cli bash
 ```
 
-15. Dentro del contenedor CLI, creamos la variable de ambiante con el nombre del canal
+#5.2. Configuración de las variables del entorno *CLI*
 
-```
+```console
 export CHANNEL_NAME=marketplace
 ```
 
-16. Creamos el canal
+5.3. Creamos el canal
 
-```
-peer channel create -o orderer.acme.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
+```console
+peer channel create -o orderer.acme.com:7050 \n
+                    -c $CHANNEL_NAME -
+                    f ./channel-artifacts/channel.tx \n
+                    --tls true \
+                    --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
 ```
 
 17. Hacer que la organización sea parte del canal
