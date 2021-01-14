@@ -14,11 +14,65 @@ chmod +x install-prereq.sh
 
 2. Ejecutar script, o correr los comandos que existen dentro del script
 
-```
+```console
 ./install-prereq.sh
 ```
 
 3. Crear crypto-config.yaml
+En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
+fuente: http://iglesia.cl/
+
+```yaml
+OrdererOrgs:
+    - Name: Orderer
+      Domain: libroeclesial.info
+      EnableNodeOUs: true
+      Specs:
+        - Hostname: orderer
+          SANS:
+            - localhost
+
+PeerOrgs:
+    - Name: Arquidiocesis_Santiago
+      Domain: arquidiocesis.santiago.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+
+    - Name: Diocesis_Iquique
+      Domain: diocesis.iquique.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+
+    - Name: Arquidiocesis_Antofagasta
+      Domain: arquidiocesis.antofagasta.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+
+    - Name: P003
+      Domain: p003.libroeclesial.info
+      EnableNodeOUs: true    
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1        
+```
 
 4. Ejecutar Generar el material critográfico de organizaciones y usuarios
 
