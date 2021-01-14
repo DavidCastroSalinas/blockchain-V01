@@ -116,19 +116,24 @@ EXPORT RT_PROFILE_ORDERER=LibroEclesialOrdererGenesis
 3.2 Creación del bloque géneris
 *Este archivo corresponde al primer bloque de la redblockchain*
 ```console
-configtxgen -profile $RT_PROFILE_ORDERER -channelID system-channel  -outputBlock ./channel-artifacts/genesis.block
+configtxgen -profile $RT_PROFILE_ORDERER -channelID system-channel \
+              -outputBlock ./channel-artifacts/genesis.block
 ```
 
 3.3 Creación del canal de comunicaciones
 *Ahora generamos fichero que para el canal de comunicaciones de la red interna*
 ```console
-configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID -outputCreateChannelTx ./channel-artifacts/channel.tx
+configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
+             -outputCreateChannelTx ./channel-artifacts/channel.tx
 ```
 
 3.4 Configuración de los AnchosPeer
 *La red estará conformada por cada unas de las organizaciones, que en este caso serán organizadas por cada una de las diócesis de Chile. (en este archivo sólo se mostrará la gestión con 3 organizaciones ya que los demás sólo serán repetidos y el podrán ser construidas en la personalización del proyecto)*
 ```console
-configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -asOrg Org1MSP
+configtxgen -profile $RT_PROFILE -channelID $CHANNEL_ID \
+            -outputAnchorPeersUpdate \
+            ./channel-artifacts/Org1MSPanchors.tx \
+            -asOrg Org1MSP
 ```
 
 ```
