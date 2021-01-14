@@ -635,34 +635,34 @@ services:
 ```
 
 
-##4.4. Levantar imagenes docker configuradas: Configuración de variables de entorno
+## 4.4. Levantar imagenes docker configuradas: Configuración de variables de entorno
 ```console
 export CHANNEL_NAME=marketplace
 export FABRIC_CFG_PATH=$WPD 
 export VERBOSE=false
 ```
 
-##4.5. Levantar imagenes docker configuradas: Iniciar Servicios
+## 4.5. Levantar imagenes docker configuradas: Iniciar Servicios
 
 ```console
 CHANNEL_NAME=$CHANNEL_NAME docker-compose -f docker-compose-cli-couchdb.yaml up -d
 ```
 
 
-#5. Entorno de Administración de Peers
-#5.1. Ingresamos al bash del entorno *CLI* 
+# 5. Entorno de Administración de Peers
+# 5.1. Ingresamos al bash del entorno *CLI* 
 
 ```console
 docker exec -it cli bash
 ```
 
-#5.2. Configuración de las variables del entorno *CLI*
+# 5.2. [CLI] Configuración de las variables del entorno *CLI*
 
 ```console
 export CHANNEL_NAME=marketplace
 ```
 
-5.3. Creamos el canal
+# 5.3. [CLI] Creamos el canal
 
 ```console
 peer channel create -o orderer.acme.com:7050 \n
@@ -672,17 +672,19 @@ peer channel create -o orderer.acme.com:7050 \n
                     --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
 ```
 
-17. Hacer que la organización sea parte del canal
+# 5.4. [CLI] Integrar a la primera organización al canal 
 
-```
+```console
 peer channel join -b marketplace.block
 ```
 
-18. Hacemos lo mismo para la organización 2 y 3
+# 5.5. [CLI] Integrar a la segunda organización al canal
 
 ```
 CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/users/Admin@org2.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org2.acme.com:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/peers/peer0.org2.acme.com/tls/ca.crt peer channel join -b marketplace.block
 ```
+
+# 5.6. [CLI] Integrar a la tercera organización al canal (se deberá integrar a todas las organizaciones existentes)
 
 ```
 CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/users/Admin@org3.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org3.acme.com:7051 CORE_PEER_LOCALMSPID="Org3MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/peers/peer0.org3.acme.com/tls/ca.crt peer channel join -b marketplace.block
