@@ -22,6 +22,16 @@ chmod +x install-prereq.sh
 ```console
 cd libroEclesial
 ```
+1.4. Creación de carpeta para el material criptográfico de Certificados de Autenticación
+```console
+mkdir channel-artifacts
+mkdir crypto-config
+mkdir chaincode
+mkdir base
+mkdir scripts
+```
+
+
 
 # 2. Preparación Material Criptográfico
 
@@ -81,12 +91,12 @@ PeerOrgs:
         Count: 1        
 ```
 
-2.2. Ejecutar Generar el material critográfico de organizaciones y usuarios
+2.2. Ejecutar Generar el material criptográfico de organizaciones y usuarios
+*El comando **cryptogen** es parte de los elementos instalados en los prerequisitos, y al ejecutarla utilizará el archivo **crypto-config.yaml** para generar todo el material criptográfico necesario para nuestra red blockchain dentro de la carpeta /channel-artifacts*
 
 ```console
 cryptogen generate --config=./crypto-config.yaml
 ```
-*El comando **cryptogen** es parte de los elementos instalados en los prerequisitos, y al ejecutarla utilizará el archivo **crypto-config.yaml** para generar todo el material criptográfico necesario para nuestra red blockchain*
 
 5. mkdir channel-artifacts
 
