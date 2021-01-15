@@ -39,7 +39,7 @@ mkdir scripts
 En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
 fuente: http://iglesia.cl/
 
-[Paso a Paso crypto-config.yaml](PASO-A-PASO (Crypto-config.yaml).md)
+[Paso a Paso crypto-config.yaml](./PASO-A-PASO (Crypto-config.yaml).md)
 
 
 
