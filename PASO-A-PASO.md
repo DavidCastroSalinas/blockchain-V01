@@ -39,9 +39,79 @@ mkdir scripts
 En nuestro caso, consideraremos como organizaciones válidas a cada una de las diocesis de Chile 
 fuente: http://iglesia.cl/
 
-[Paso a Paso crypto-config.yaml](https://github.com/DavidCastroSalinas/blockchain-V01/blob/main/PASO-A-PASO (Crypto-config.yaml).md)
+```yaml
+OrdererOrgs:
+    - Name: Orderer
+      Domain: libroeclesial.info
+      EnableNodeOUs: true
+      Specs:
+        - Hostname: orderer
+          SANS:
+            - localhost
 
+PeerOrgs:
+    - Name: DIOCESIS01 #Arquidiocesis de Santiago
+      Domain: diocesis01.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
 
+    - Name: DIOCESIS02 #Diocesis de Melipilla
+      Domain: diocesis02.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+
+    - Name: DIOCESIS03 #Diocesis de Chillán
+      Domain: diocesis03.libroeclesial.info
+      EnableNodeOUs: true
+      Template:
+        Count: 1
+        SANS:
+          - localhost
+      Users:
+        Count: 1
+
+# Definición de las demás diocesis
+- Diocesis_Arica
+- Diocesis_Iquique
+- Arquidiocesis_Antofagasta
+- Diocesis_Calama
+- Diocesis_Copiapo
+- ArquiDiocesis_La Serena
+- Prelatura_Illapel
+- Diocesis_San Felipe
+- Diocesis_Valparaíso
+-
+- Diocesis_Melipilla
+- Arquidiocesis_Santiago
+- Obispado_Castrense
+- Diocesis_SanBernardo
+- Diocesis_Rancagua
+- Diocesis_Talca
+- Diocesis_Linares
+- Diocesis_Chillan
+- ArquiDiocesis_Concepción
+-  
+- Diocesis_SantaMaríadelosAngeles
+- Diocesis_Temuco
+- Diocesis_Villarrica
+- Diocesis_Valdivia
+- Diocesis_Osorno
+- ArquiDiocesis_PuertoMontt
+- Diocesis_Ancud
+- Vicariato_Aysén
+- Diocesis_Punta_Arenas
+- Prelatura_Personal_Opus_Dei
+```
 
 2.2. Ejecutar Generar el material criptográfico de organizaciones y usuarios
 *El comando **cryptogen** es parte de los elementos instalados en los prerequisitos, y al ejecutarla utilizará el archivo **crypto-config.yaml** para generar todo el material criptográfico necesario para nuestra red blockchain dentro de la carpeta /channel-artifacts*
