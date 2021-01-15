@@ -5,14 +5,14 @@
 
 # 1. Instalación de pre-requisitos
 
-1.1. Dar permiso de ejecución al archivo de prerequisitos
+###1.1. Dar permiso de ejecución al archivo de prerequisitos
 
 ```console
 chmod +x install-prereq.sh
 
 ```
 
-1.2. Ejecutación de script con prerequisitos, o correr los comandos que existen dentro del script
+###1.2. Ejecutación de script con prerequisitos, o correr los comandos que existen dentro del script
 
 ```console
 ./install-prereq.sh
@@ -396,8 +396,6 @@ version: '2'
 networks:
   basic:
 services:
-
-
   couchdb0:
     image: couchdb:3.1
     environment:
@@ -679,39 +677,74 @@ peer channel join -b marketplace.block
 ```
 
 ### 5.5. [CLI] Integrar a la segunda organización al canal
-
 ```
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/users/Admin@org2.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org2.acme.com:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/peers/peer0.org2.acme.com/tls/ca.crt peer channel join -b marketplace.block
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/users/Admin@org2.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org2.acme.com:7051 \
+    CORE_PEER_LOCALMSPID="Org2MSP" \
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/peers/peer0.org2.acme.com/tls/ca.crt \
+    peer channel join \
+    -b marketplace.block
 ```
 
 ###  5.6. [CLI] Integrar a la tercera organización al canal (se deberá integrar a todas las organizaciones existentes)
-
-```
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/users/Admin@org3.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org3.acme.com:7051 CORE_PEER_LOCALMSPID="Org3MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/peers/peer0.org3.acme.com/tls/ca.crt peer channel join -b marketplace.block
-```
-
-19. Ahora debemos configurar el anchor peer para cada organización
-
-```
-peer channel update -o orderer.acme.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org1MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
+```console
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/users/Admin@org3.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org3.acme.com:7051 \
+    CORE_PEER_LOCALMSPID="Org3MSP" \
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/peers/peer0.org3.acme.com/tls/ca.crt \
+    peer channel join \
+    -b marketplace.block
 ```
 
+### 5.7. Ahora debemos configurar el anchor peer para cada organización
+### 5.7.1 Organización 1
+```console
+peer channel update \
+  -o orderer.acme.com:7050 \
+  -c $CHANNEL_NAME \
+  -f ./channel-artifacts/Org1MSPanchors.tx \
+  --tls \
+  --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
 ```
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/users/Admin@org2.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org2.acme.com:7051 CORE_PEER_LOCALMSPID="Org2MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/peers/peer0.org2.acme.com/tls/ca.crt peer channel update -o orderer.acme.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org2MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
+
+### 5.7.2 Organización 2
+```console
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/users/Admin@org2.acme.com/msp/ \
+  CORE_PEER_ADDRESS=peer0.org2.acme.com:7051 \
+  CORE_PEER_LOCALMSPID="Org2MSP" \ 
+  CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.acme.com/peers/peer0.org2.acme.com/tls/ca.crt \ 
+  peer channel update \
+  -o orderer.acme.com:7050 \
+  -c $CHANNEL_NAME \
+  -f ./channel-artifacts/Org2MSPanchors.tx \
+  --tls \
+  --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
 ```
 
+### 5.7.3 Organización 3
+```console
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/users/Admin@org3.acme.com/msp/ \
+  CORE_PEER_ADDRESS=peer0.org3.acme.com:7051 \
+  CORE_PEER_LOCALMSPID="Org3MSP" \
+  CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/peers/peer0.org3.acme.com/tls/ca.crt \
+  peer channel update \
+  -o orderer.acme.com:7050  \
+  -c $CHANNEL_NAME  \
+  -f ./channel-artifacts/Org3MSPanchors.tx  \
+  --tls  \
+  --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
 ```
-CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/users/Admin@org3.acme.com/msp/ CORE_PEER_ADDRESS=peer0.org3.acme.com:7051 CORE_PEER_LOCALMSPID="Org3MSP" CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.acme.com/peers/peer0.org3.acme.com/tls/ca.crt peer channel update -o orderer.acme.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/Org3MSPanchors.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/acme.com/orderers/orderer.acme.com/msp/tlscacerts/tlsca.acme.com-cert.pem
+### 5.7.4 Volvemos al entorno de bash anterior
+```console
+  exit
 ```
 
 
-20. Crear la carpeta chaincode/foodcontrol
+# 6 Creación la carpeta chaincode (Smart Constract)
 
-21. Crear el archivo chaincode/foodcontrol/foodcontrol.go
+# 6.1. Crear el archivo chaincode/foodcontrol/foodcontrol.go
 
-22. Crear el archivo chaincode/foodcontrol/go.mod
+# 6.2. Crear el archivo chaincode/foodcontrol/go.mod
 
-23. Ingresamos al contanedor cli
+# 6.3. Ingresar al contanedor cli
 
 ```
 docker exec -it cli bash
